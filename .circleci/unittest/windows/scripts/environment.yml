@@ -9,7 +9,7 @@ dependencies:
   - libpng
   - jpeg
   - ca-certificates
-  - h5py
+  - h5py # [x86_64 and (not win or py <= 39)]
   - pip:
     - future
     - pillow >=5.3.0, !=8.3.*
