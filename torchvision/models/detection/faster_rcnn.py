@@ -1,17 +1,18 @@
+# torchvision.models.detection
 from torch import nn
 import torch.nn.functional as F
 
 from torchvision.ops import MultiScaleRoIAlign
 
-from ._utils import overwrite_eps
-from ..._internally_replaced_utils import load_state_dict_from_url
+from torchvision.models.detection._utils import overwrite_eps
+from torchvision._internally_replaced_utils import load_state_dict_from_url
 
-from .anchor_utils import AnchorGenerator
-from .generalized_rcnn import GeneralizedRCNN
-from .rpn import RPNHead, RegionProposalNetwork
+from torchvision.models.detection.anchor_utils import AnchorGenerator
+from torchvision.models.detection.generalized_rcnn import GeneralizedRCNN
+from torchvision.models.detection.rpn import RPNHead, RegionProposalNetwork
 from .roi_heads import RoIHeads
-from .transform import GeneralizedRCNNTransform
-from .backbone_utils import resnet_fpn_backbone, _validate_trainable_layers, mobilenet_backbone
+from torchvision.models.detection.transform import GeneralizedRCNNTransform
+from torchvision.models.detection.backbone_utils import resnet_fpn_backbone, _validate_trainable_layers, mobilenet_backbone
 
 
 __all__ = [

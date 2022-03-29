@@ -1,14 +1,15 @@
+# torchvision.models.detection
 from collections import OrderedDict
 
 from torch import nn
 
 from torchvision.ops import MultiScaleRoIAlign
 
-from ._utils import overwrite_eps
-from ..._internally_replaced_utils import load_state_dict_from_url
+from torchvision.models.detection._utils import overwrite_eps
+from torchvision._internally_replaced_utils import load_state_dict_from_url
 
 from .faster_rcnn import FasterRCNN
-from .backbone_utils import resnet_fpn_backbone, _validate_trainable_layers
+from torchvision.models.detection.backbone_utils import resnet_fpn_backbone, _validate_trainable_layers
 
 __all__ = [
     "MaskRCNN", "maskrcnn_resnet50_fpn",
