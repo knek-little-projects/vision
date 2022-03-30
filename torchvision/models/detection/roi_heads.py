@@ -489,6 +489,10 @@ class RoIHeads(nn.Module):
         'fg_bg_sampler': det_utils.BalancedPositiveNegativeSampler,
     }
 
+    fastrcnn_loss = fastrcnn_loss
+    maskrcnn_loss = maskrcnn_loss
+    keypointrcnn_loss = keypointrcnn_loss
+
     def __init__(self,
                  box_roi_pool,
                  box_head,
@@ -757,7 +761,7 @@ class RoIHeads(nn.Module):
         losses = {}
         if self.training:
             assert labels is not None and regression_targets is not None
-            loss_classifier, loss_box_reg = fastrcnn_loss(
+            loss_classifier, loss_box_reg = type(self).fastrcnn_loss(
                 class_logits, box_regression, labels, regression_targets)
             losses = {
                 "loss_classifier": loss_classifier,
@@ -805,7 +809,7 @@ class RoIHeads(nn.Module):
 
                 gt_masks = [t["masks"] for t in targets]
                 gt_labels = [t["labels"] for t in targets]
-                rcnn_loss_mask = maskrcnn_loss(
+                rcnn_loss_mask = type(self).maskrcnn_loss(
                     mask_logits, mask_proposals,
                     gt_masks, gt_labels, pos_matched_idxs)
                 loss_mask = {
@@ -847,7 +851,7 @@ class RoIHeads(nn.Module):
                 assert pos_matched_idxs is not None
 
                 gt_keypoints = [t["keypoints"] for t in targets]
-                rcnn_loss_keypoint = keypointrcnn_loss(
+                rcnn_loss_keypoint = type(self).keypointrcnn_loss(
                     keypoint_logits, keypoint_proposals,
                     gt_keypoints, pos_matched_idxs)
                 loss_keypoint = {
